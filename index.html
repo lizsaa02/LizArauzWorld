@@ -842,7 +842,7 @@
     }
     .dyn-store-card:hover { transform: translateY(-4px); border-color: rgba(197,5,5,0.4); }
     .dyn-store-thumb {
-      height: 200px; overflow: hidden; position: relative; background: #111;
+      height: 280px; overflow: hidden; position: relative; background: #111;
     }
     .dyn-store-thumb img {
       width: 100%; height: 100%; object-fit: cover;
@@ -900,6 +900,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
+      row-gap: 24px;
     }
 
     .store-card {
@@ -1771,7 +1772,7 @@
       <h2 class="section-title">LA <span class="red">TIENDA</span></h2>
     </div>
     <p class="store-intro reveal">
-      Desde patrones digitales de crochet hasta comisiones personalizadas — aquí encuentras mi trabajo disponible para llevar a casa. Los pagos se procesan de forma segura a través de mi tienda oficial.
+      Crochet en todas sus formas — patrones DIY descargables, comisiones de muñecos y personajes, ropa y accesorios tejidos a mano, y ropita para perritos. Arte e ilustraciones digitales por comisión. Cursos presenciales y talleres en Chiriquí. Todo hecho con amor, precisión y mucho hilo.
     </p>
 
     <!-- Beacons store top bar -->
@@ -1787,7 +1788,6 @@
 
     <!-- Dynamic store grid — cargado desde Beacons -->
     <div class="store-grid reveal" id="beacons-store-grid">
-      <!-- Los productos se cargan automáticamente desde Beacons -->
       <div class="store-loading">
         <div class="store-loading-spinner"></div>
         <p>Cargando productos...</p>
@@ -2054,6 +2054,42 @@
         precio: "$10.00",
         emoji: "📄",
         img: "https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__1e57f2dc-4c39-4c84-8a93-bfacd4ac5e32__f6a27f5b-d8c0-43fe-bb62-922416fc11b7.webp?t=1780523525940",
+        link: "https://website.beacons.ai/liz.a.02"
+      },
+      {
+        nombre: "Ropa Crochet",
+        categoria: "Clothes · Encargo",
+        tag: "Hecho a mano",
+        precio: "Consultar precio",
+        emoji: "👗",
+        img: "",
+        link: "https://website.beacons.ai/liz.a.02"
+      },
+      {
+        nombre: "Ropita para Perritos",
+        categoria: "Crochet · Pets",
+        tag: "Encargo",
+        precio: "Consultar precio",
+        emoji: "🐶",
+        img: "",
+        link: "https://website.beacons.ai/liz.a.02"
+      },
+      {
+        nombre: "Arte & Ilustraciones",
+        categoria: "Art · Comisión",
+        tag: "Comisión",
+        precio: "Consultar precio",
+        emoji: "🎨",
+        img: "",
+        link: "https://website.beacons.ai/liz.a.02"
+      },
+      {
+        nombre: "Cursos & Talleres",
+        categoria: "Do it · Presencial",
+        tag: "Presencial",
+        precio: "Consultar fechas",
+        emoji: "📚",
+        img: "",
         link: "https://website.beacons.ai/liz.a.02"
       }
     ];
