@@ -783,6 +783,108 @@
     /* ══════════════════════════════════════════
        TIENDA
     ══════════════════════════════════════════ */
+    /* ── Beacons store bar ── */
+    .beacons-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid rgba(197,5,5,0.3);
+      border-radius: 4px;
+      padding: 12px 20px;
+      margin-bottom: 32px;
+    }
+    .beacons-bar-left { display: flex; align-items: center; gap: 10px; }
+    .beacons-live-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #C50505; animation: bpulse 2s infinite;
+    }
+    @keyframes bpulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.4); }
+    }
+    .beacons-live-text {
+      font-family: var(--font-sub); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .beacons-visit-btn {
+      font-family: var(--font-sub); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--red); text-decoration: none;
+      border-bottom: 1px solid rgba(197,5,5,0.4);
+      padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+    }
+    .beacons-visit-btn:hover { color: var(--white); border-color: var(--white); }
+    .store-loading {
+      grid-column: 1 / -1; display: flex; flex-direction: column;
+      align-items: center; gap: 16px; padding: 60px 20px;
+      color: rgba(255,255,255,0.3); font-family: var(--font-sub);
+      font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .store-loading-spinner {
+      width: 32px; height: 32px;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-top-color: var(--red); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .beacons-fallback {
+      text-align: center; padding: 48px 24px;
+      color: rgba(255,255,255,0.4); font-size: 15px;
+    }
+    .beacons-fallback .btn-primary { margin-top: 20px; display: inline-block; }
+    .dyn-store-card {
+      background: #1a1a1a;
+      border: 0.5px solid rgba(255,255,255,0.06);
+      border-radius: 3px; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .dyn-store-card:hover { transform: translateY(-4px); border-color: rgba(197,5,5,0.4); }
+    .dyn-store-thumb {
+      height: 200px; overflow: hidden; position: relative; background: #111;
+    }
+    .dyn-store-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s; filter: grayscale(15%);
+    }
+    .dyn-store-card:hover .dyn-store-thumb img { transform: scale(1.05); filter: grayscale(0%); }
+    .dyn-store-thumb-ph {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #1a0000, #2d0808);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; opacity: 0.5;
+    }
+    .dyn-store-tag {
+      position: absolute; top: 12px; left: 12px;
+      font-family: var(--font-sub); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 9px; background: var(--red); color: var(--white);
+    }
+    .dyn-store-info { padding: 20px; }
+    .dyn-store-cat {
+      font-family: var(--font-sub); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 6px;
+    }
+    .dyn-store-name {
+      font-family: var(--font-sub); font-size: 17px; font-weight: 700;
+      color: var(--white); letter-spacing: 0.03em; margin-bottom: 8px;
+    }
+    .dyn-store-price {
+      font-family: var(--font-sub); font-size: 15px; font-weight: 600;
+      color: rgba(255,255,255,0.7); margin-bottom: 14px;
+    }
+    .dyn-store-btn {
+      display: block; text-align: center;
+      font-family: var(--font-sub); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 11px; color: var(--white); background: transparent;
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 2px;
+      text-decoration: none; transition: background 0.2s, border-color 0.2s;
+    }
+    .dyn-store-btn:hover { background: var(--red); border-color: var(--red); }
+
     #tienda { background: var(--black); }
 
     .store-intro {
@@ -1669,66 +1771,35 @@
       <h2 class="section-title">LA <span class="red">TIENDA</span></h2>
     </div>
     <p class="store-intro reveal">
-      Desde patrones digitales de crochet hasta comisiones de ilustración personalizadas — aquí encuentras mi trabajo disponible para llevar a casa.
+      Desde patrones digitales de crochet hasta comisiones personalizadas — aquí encuentras mi trabajo disponible para llevar a casa. Los pagos se procesan de forma segura a través de mi tienda oficial.
     </p>
-    <div class="store-grid reveal">
 
-      <div class="store-card">
-        <div class="store-thumb t1">
-          <div class="store-tag">Digital</div>
-          🧶
-        </div>
-        <div class="store-info">
-          <div class="store-cat">Crochet</div>
-          <div class="store-name">Patrones PDF</div>
-          <div class="store-desc">Patrones descargables con instrucciones detalladas paso a paso en español.</div>
-          <div class="store-price">desde $5.00</div>
-          <a href="#contacto" class="store-btn">Comprar patrón</a>
-        </div>
+    <!-- Beacons store top bar -->
+    <div class="beacons-bar reveal">
+      <div class="beacons-bar-left">
+        <span class="beacons-live-dot"></span>
+        <span class="beacons-live-text">Tienda activa en Beacons</span>
       </div>
+      <a href="https://website.beacons.ai/liz.a.02" target="_blank" class="beacons-visit-btn">
+        Ver tienda completa →
+      </a>
+    </div>
 
-      <div class="store-card">
-        <div class="store-thumb t2">
-          <div class="store-tag">Encargo</div>
-          👗
-        </div>
-        <div class="store-info">
-          <div class="store-cat">Moda Crochet</div>
-          <div class="store-name">Ropa personalizada</div>
-          <div class="store-desc">Prendas tejidas a mano bajo pedido. Colores, tallas y diseños a tu gusto.</div>
-          <div class="store-price">Consultar precio</div>
-          <a href="#contacto" class="store-btn">Hacer pedido</a>
-        </div>
+    <!-- Dynamic store grid — cargado desde Beacons -->
+    <div class="store-grid reveal" id="beacons-store-grid">
+      <!-- Los productos se cargan automáticamente desde Beacons -->
+      <div class="store-loading">
+        <div class="store-loading-spinner"></div>
+        <p>Cargando productos...</p>
       </div>
+    </div>
 
-      <div class="store-card">
-        <div class="store-thumb t3">
-          <div class="store-tag">Comisión</div>
-          🖼️
-        </div>
-        <div class="store-info">
-          <div class="store-cat">Ilustración</div>
-          <div class="store-name">Arte por comisión</div>
-          <div class="store-desc">Retratos digitales, personajes y piezas artísticas personalizadas.</div>
-          <div class="store-price">desde $30.00</div>
-          <a href="#contacto" class="store-btn">Solicitar comisión</a>
-        </div>
-      </div>
-
-      <div class="store-card">
-        <div class="store-thumb t4">
-          <div class="store-tag">Presencial</div>
-          📚
-        </div>
-        <div class="store-info">
-          <div class="store-cat">Talleres</div>
-          <div class="store-name">Cursos & Talleres</div>
-          <div class="store-desc">Talleres presenciales en David, Chiriquí. Arte, diseño y crochet para todos los niveles.</div>
-          <div class="store-price">Consultar fechas</div>
-          <a href="#contacto" class="store-btn">Ver disponibilidad</a>
-        </div>
-      </div>
-
+    <!-- Fallback CTA si Beacons no carga -->
+    <div class="beacons-fallback" id="beacons-fallback" style="display:none;">
+      <p>Explora todos mis productos disponibles en mi tienda oficial</p>
+      <a href="https://website.beacons.ai/liz.a.02" target="_blank" class="btn-primary">
+        Ir a La Tienda →
+      </a>
     </div>
   </section>
 
@@ -1947,6 +2018,89 @@
 
   <!-- ══ JAVASCRIPT ══ -->
   <script>
+    // ── Beacons Store — Productos dinámicos ──
+    const BEACONS_PRODUCTS = [
+      {
+        nombre: "CHIMMY BT21",
+        categoria: "Crochet · Comisión",
+        tag: "Encargo",
+        precio: "$15.00",
+        emoji: "🧶",
+        img: "https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__20cb1455-1284-4adb-a237-f59034bac3b9__57acef49-4922-4bb1-9023-1c53cdb1de6e.webp?t=1780801571359",
+        link: "https://website.beacons.ai/liz.a.02"
+      },
+      {
+        nombre: "COOKY BT21",
+        categoria: "Crochet · Comisión",
+        tag: "Encargo",
+        precio: "$15.00",
+        emoji: "🧶",
+        img: "https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__0c0d75bc-d4fd-4475-a8f4-46baac5514b8__01b00f7f-c949-40e3-9907-08b133b62e46.webp?t=1780802296888",
+        link: "https://website.beacons.ai/liz.a.02"
+      },
+      {
+        nombre: "RJ BT21",
+        categoria: "Crochet · Comisión",
+        tag: "Encargo",
+        precio: "$15.00",
+        emoji: "🧶",
+        img: "https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__fbf12373-1572-48e3-9b50-c94bf422eaca__956653ff-cec5-4b77-bfed-bb836c00a2cb.webp?t=1780802635081",
+        link: "https://website.beacons.ai/liz.a.02"
+      },
+      {
+        nombre: "BokBear Pet Pattern",
+        categoria: "Crochet DIY · Patrón",
+        tag: "Digital",
+        precio: "$10.00",
+        emoji: "📄",
+        img: "https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__1e57f2dc-4c39-4c84-8a93-bfacd4ac5e32__f6a27f5b-d8c0-43fe-bb62-922416fc11b7.webp?t=1780523525940",
+        link: "https://website.beacons.ai/liz.a.02"
+      }
+    ];
+
+    function renderBeaconsStore() {
+      const grid = document.getElementById('beacons-store-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      if (!BEACONS_PRODUCTS.length) {
+        document.getElementById('beacons-fallback').style.display = 'block';
+        return;
+      }
+
+      BEACONS_PRODUCTS.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'dyn-store-card';
+        card.innerHTML = `
+          <div class="dyn-store-thumb">
+            <div class="dyn-store-tag">${p.tag}</div>
+            ${p.img
+              ? `<img src="${p.img}" alt="${p.nombre}" loading="lazy"
+                      onerror="this.outerHTML='<div class=\\'dyn-store-thumb-ph\\'>${p.emoji}</div>'">`
+              : `<div class="dyn-store-thumb-ph">${p.emoji}</div>`}
+          </div>
+          <div class="dyn-store-info">
+            <div class="dyn-store-cat">${p.categoria}</div>
+            <div class="dyn-store-name">${p.nombre}</div>
+            <div class="dyn-store-price">${p.precio}</div>
+            <a href="${p.link}" target="_blank" class="dyn-store-btn">Comprar ahora →</a>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderBeaconsStore);
+
+    /*
+    ┌─────────────────────────────────────────────────┐
+    │  ACTUALIZAR TIENDA — Para Liz                   │
+    │  Cuando agregues producto en Beacons, dile a    │
+    │  Claude: "Agrega [nombre] con precio $X"        │
+    │  Claude actualiza BEACONS_PRODUCTS y te da      │
+    │  el nuevo index.html para subir a GitHub        │
+    └─────────────────────────────────────────────────┘
+    */
+
     // ── Cursor personalizado ──
     const cursor = document.getElementById('cursor');
     const ring   = document.getElementById('cursorRing');
