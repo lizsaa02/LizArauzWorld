@@ -885,6 +885,144 @@
     }
     .dyn-store-btn:hover { background: var(--red); border-color: var(--red); }
 
+    /* ── Category Gallery ── */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .cat-card {
+      background: #1a1a1a;
+      border: 0.5px solid rgba(255,255,255,0.06);
+      border-radius: 3px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .cat-card:hover { border-color: rgba(197,5,5,0.5); transform: translateY(-4px); }
+
+    /* Thumb area */
+    .cat-thumb {
+      height: 260px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      background: #111;
+    }
+    .cat-thumb-empty {
+      background: linear-gradient(135deg, #1a0000 0%, #2a0808 100%);
+      align-items: center;
+      justify-content: center;
+    }
+    .cat-empty-icon { font-size: 64px; opacity: 0.35; }
+
+    /* Product count badge */
+    .cat-count {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: rgba(0,0,0,0.75);
+      color: rgba(255,255,255,0.7);
+      font-family: var(--font-sub);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px;
+      backdrop-filter: blur(4px);
+      z-index: 3;
+    }
+
+    /* Images layout inside thumb */
+    .cat-imgs {
+      display: flex;
+      width: 100%; height: 100%;
+      gap: 2px;
+    }
+    .cat-img-main {
+      flex: 2;
+      object-fit: cover;
+      height: 100%;
+      transition: transform 0.5s;
+    }
+    .cat-img-solo {
+      flex: 1 1 100%;
+      width: 100%;
+    }
+    .cat-img-stack {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .cat-img-stack img {
+      flex: 1;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .cat-card:hover .cat-img-main,
+    .cat-card:hover .cat-img-stack img { transform: scale(1.05); }
+
+    /* Overlay on hover */
+    .cat-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 24px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 4;
+    }
+    .cat-card:hover .cat-overlay { opacity: 1; }
+    .cat-btn {
+      font-family: var(--font-sub);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white);
+      background: var(--red);
+      padding: 10px 24px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cat-btn:hover { background: var(--red-vib); }
+
+    /* Category info below thumb */
+    .cat-info { padding: 20px 22px; }
+    .cat-tag {
+      font-family: var(--font-sub);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 5px;
+    }
+    .cat-name {
+      font-family: var(--font-sub);
+      font-size: 20px; font-weight: 700;
+      color: var(--white); letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+    .cat-desc {
+      font-size: 13px; font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65; margin-bottom: 12px;
+    }
+    .cat-price-hint {
+      font-family: var(--font-sub);
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .cat-thumb { height: 220px; }
+    }
+
     #tienda { background: var(--black); }
 
     .store-intro {
@@ -1772,10 +1910,10 @@
       <h2 class="section-title">LA <span class="red">TIENDA</span></h2>
     </div>
     <p class="store-intro reveal">
-      Crochet en todas sus formas — patrones DIY descargables, comisiones de muñecos y personajes, ropa y accesorios tejidos a mano, y ropita para perritos. Arte e ilustraciones digitales por comisión. Cursos presenciales y talleres en Chiriquí. Todo hecho con amor, precisión y mucho hilo.
+      Crochet en todas sus formas — patrones DIY descargables, comisiones de muñecos y personajes, ropa y ropita para perritos. Arte e ilustraciones digitales por comisión. Cursos presenciales y talleres en Chiriquí. Todo hecho con amor, precisión y mucho hilo.
     </p>
 
-    <!-- Beacons store top bar -->
+    <!-- Beacons bar -->
     <div class="beacons-bar reveal">
       <div class="beacons-bar-left">
         <span class="beacons-live-dot"></span>
@@ -1786,20 +1924,102 @@
       </a>
     </div>
 
-    <!-- Dynamic store grid — cargado desde Beacons -->
-    <div class="store-grid reveal" id="beacons-store-grid">
-      <div class="store-loading">
-        <div class="store-loading-spinner"></div>
-        <p>Cargando productos...</p>
-      </div>
-    </div>
+    <!-- Category Gallery -->
+    <div class="cat-grid reveal">
 
-    <!-- Fallback CTA si Beacons no carga -->
-    <div class="beacons-fallback" id="beacons-fallback" style="display:none;">
-      <p>Explora todos mis productos disponibles en mi tienda oficial</p>
-      <a href="https://website.beacons.ai/liz.a.02" target="_blank" class="btn-primary">
-        Ir a La Tienda →
-      </a>
+      <!-- CROCHET · Comisiones -->
+      <div class="cat-card">
+        <div class="cat-thumb">
+          <div class="cat-count">3 productos</div>
+          <div class="cat-imgs">
+            <img src="https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__20cb1455-1284-4adb-a237-f59034bac3b9__57acef49-4922-4bb1-9023-1c53cdb1de6e.webp?t=1780801571359" alt="CHIMMY BT21" class="cat-img-main">
+            <div class="cat-img-stack">
+              <img src="https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__0c0d75bc-d4fd-4475-a8f4-46baac5514b8__01b00f7f-c949-40e3-9907-08b133b62e46.webp?t=1780802296888" alt="COOKY BT21">
+              <img src="https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__fbf12373-1572-48e3-9b50-c94bf422eaca__956653ff-cec5-4b77-bfed-bb836c00a2cb.webp?t=1780802635081" alt="RJ BT21">
+            </div>
+          </div>
+          <div class="cat-overlay">
+            <a href="https://website.beacons.ai/liz.a.02" target="_blank" class="cat-btn">Ver colección →</a>
+          </div>
+        </div>
+        <div class="cat-info">
+          <div class="cat-tag">Crochet</div>
+          <div class="cat-name">Comisiones</div>
+          <div class="cat-desc">Muñecos y personajes tejidos a mano bajo pedido. Trae tu personaje favorito a la vida.</div>
+          <div class="cat-price-hint">desde $15.00</div>
+        </div>
+      </div>
+
+      <!-- CROCHET · Patrones DIY -->
+      <div class="cat-card">
+        <div class="cat-thumb">
+          <div class="cat-count">1 producto</div>
+          <div class="cat-imgs">
+            <img src="https://cdn.beacons.ai/user_content/dT39msmdviWlvEJhBjMdEElXyFP2/referenced_images/generated-images__store__product-image__1e57f2dc-4c39-4c84-8a93-bfacd4ac5e32__f6a27f5b-d8c0-43fe-bb62-922416fc11b7.webp?t=1780523525940" alt="BokBear" class="cat-img-main cat-img-solo">
+          </div>
+          <div class="cat-overlay">
+            <a href="https://website.beacons.ai/liz.a.02" target="_blank" class="cat-btn">Ver patrones →</a>
+          </div>
+        </div>
+        <div class="cat-info">
+          <div class="cat-tag">Crochet DIY</div>
+          <div class="cat-name">Patrones PDF</div>
+          <div class="cat-desc">Instrucciones paso a paso en español para tejer tus propios personajes. Descarga inmediata.</div>
+          <div class="cat-price-hint">desde $10.00</div>
+        </div>
+      </div>
+
+      <!-- CLOTHES · Ropa & Pets -->
+      <div class="cat-card">
+        <div class="cat-thumb cat-thumb-empty">
+          <div class="cat-count">Próximamente</div>
+          <div class="cat-empty-icon">👗🐶</div>
+          <div class="cat-overlay">
+            <a href="https://website.beacons.ai/liz.a.02" target="_blank" class="cat-btn">Ver colección →</a>
+          </div>
+        </div>
+        <div class="cat-info">
+          <div class="cat-tag">Clothes</div>
+          <div class="cat-name">Ropa & Pets</div>
+          <div class="cat-desc">Prendas tejidas a mano para humanos y ropita para perritos. Diseños únicos bajo encargo.</div>
+          <div class="cat-price-hint">Consultar precio</div>
+        </div>
+      </div>
+
+      <!-- ART · Ilustraciones -->
+      <div class="cat-card">
+        <div class="cat-thumb cat-thumb-empty">
+          <div class="cat-count">Próximamente</div>
+          <div class="cat-empty-icon">🎨</div>
+          <div class="cat-overlay">
+            <a href="https://website.beacons.ai/liz.a.02" target="_blank" class="cat-btn">Ver ilustraciones →</a>
+          </div>
+        </div>
+        <div class="cat-info">
+          <div class="cat-tag">Art</div>
+          <div class="cat-name">Ilustraciones</div>
+          <div class="cat-desc">Arte digital e ilustraciones personalizadas por comisión. Retratos, personajes y piezas únicas.</div>
+          <div class="cat-price-hint">Consultar precio</div>
+        </div>
+      </div>
+
+      <!-- DO IT · Cursos -->
+      <div class="cat-card">
+        <div class="cat-thumb cat-thumb-empty">
+          <div class="cat-count">Próximamente</div>
+          <div class="cat-empty-icon">📚</div>
+          <div class="cat-overlay">
+            <a href="https://website.beacons.ai/liz.a.02" target="_blank" class="cat-btn">Ver cursos →</a>
+          </div>
+        </div>
+        <div class="cat-info">
+          <div class="cat-tag">Do it</div>
+          <div class="cat-name">Cursos & Talleres</div>
+          <div class="cat-desc">Talleres presenciales en Chiriquí. Aprende crochet, arte y diseño con Liz. Todos los niveles.</div>
+          <div class="cat-price-hint">Consultar fechas</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
